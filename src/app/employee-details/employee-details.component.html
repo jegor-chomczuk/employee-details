@@ -1,21 +1,10 @@
-<h2>Employee Details</h2> 
-
-<hr/>
-  <div>
-    <label><b>Name: </b></label> {{employee.name}}
-  </div>
-  <div>
-    <label><b>Phone Number: </b></label> {{employee.phoneNumber}}
-  </div>
-  <div>
-    <label><b>Office Number: </b></label> {{employee.officeNumber}}
-  </div>  
-  <div>
-    <label><b>Position: </b></label> {{employee.position}}
-  </div>  
-  <div>
-    <label><b>Manager: </b></label> {{employee.manager}}
-  </div>  
-<br>
-<br>
-<button class="btn btn-primary" (click)="list()">Back to Employee List</button><br>
+<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Info
+</button>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item">Phone Number: {{employeeInfo.phoneNumber}}</a></li>
+    <li><a class="dropdown-item">Office Number: {{employeeInfo.officeNumber}}</a></li>
+    <li><a class="dropdown-item">Position: {{employeeInfo.position}}</a></li>
+    <li><a class="dropdown-item">Manager: {{employeeInfo.manager}}</a></li>
+    <button class="dropdown-item delete-button" (click)="delete(index, employeeInfo.id)">Delete Employee</button>
+</ul>

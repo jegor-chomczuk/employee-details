@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Employee } from '../employee';
-import { EmployeeService } from '../employee.service';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Employees, EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: 'app-employee-details',
@@ -9,27 +7,26 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./employee-details.component.css']
 })
 export class EmployeeDetailsComponent implements OnInit {
+  
+  @Input()
+  employeeInfo!: Employees;
 
-  id!: number;
-  employee!: Employee;
+  @Input()
+  index!: number;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private employeeService: EmployeeService) { }
+  @Output()
+  deleteEmployeeEvent = new EventEmitter();
+
+  @Output()
+  deleteElementEvent = new EventEmitter();
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.employee = new Employee(1, "", "", 1, "", "");
-    this.id = this.route.snapshot.params['id'];
-    console.log("check id", this.id);
-    this.employeeService.getEmployee(this.id)
-      .subscribe(data => {
-        console.log(data)
-        this.employee = data;
-    console.log("check data", this.employee);
-      }, error => console.log(error));
   }
 
-  list(){
-    this.router.navigate(['employees']);
+  delete(index: number, id: number): void {
+    this.deleteElementEvent.emit(index);
+    this.deleteEmployeeEvent.emit(id);
   }
 }
